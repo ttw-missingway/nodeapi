@@ -2,15 +2,16 @@ import express from 'express'
 
 const router = express.Router();
 
+//middleware
+import { requireSignin, isAdmin } from "../middleware/auth.js";
+
 //controllers
-import { register, login } from "../controllers/auth.js";
+import { register, login, secret } from "../controllers/auth.js";
 
 router.post('/register', register);
 router.post('/login', login);
 
 //testing
-router.get('/secret', (req, res) => {
-    res.json({ message: "You have access to this secret route" });
-});
+router.get('/secret', requireSignin, isAdmin, secret);
 
 export default router;
