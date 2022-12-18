@@ -1,0 +1,9 @@
+.active{
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+}
+
+h1{
+    text-align: center;
+    margin-top: 25px;
+}
