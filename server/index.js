@@ -8,13 +8,11 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 //db
-mongoose.set('strictQuery', false);
-mongoose.connect(process.env.MONGO_URI)
-.then(() => console.log('DB Connected'));
-
-mongoose.connection.on('error', err => {
-    console.log(`DB connection error: ${err.message}`)
-});
+mongoose
+.set('strictQuery', false)
+.connect(process.env.MONGO_URI)
+.then(() => console.log('DB Connected'))
+.catch((err) => console.log("DB ERROR => ", err));
 
 // bring in routes
 const postRoutes = require('./routes/post');
