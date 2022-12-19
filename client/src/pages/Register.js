@@ -1,27 +1,42 @@
 import { useState } from "react";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export default function Register() {
   //state
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState('Dylan');
+  const [email, setEmail] = useState('dylan@gmail.com');
+  const [password, setPassword] = useState('qwerty');
 
   const handleSubmit = async(e) =>{
     e.preventDefault();
     try{
-      console.log(name, email, password);
+      const { data } = await axios.post(`${process.env.REACT_APP_API}/register`, {
+        name,
+        email,
+        password,
+      });
+
+      console.log(data);
+
+      if (data?.error){
+        toast.error(data.error);
+      }
+      else{
+        toast.success('Registration Successsful');
+      }
     }
     catch (err){
       console.log(err);
+      toast.error("Registration Failed");
     }
-  }
+  };
 
   return (
     <div>
       <h1>
         Register
       </h1>
-
       <div className="container mt-5">
         <div className="row">
           <div className="col-md-6 offset-md-3">

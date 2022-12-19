@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import expressValidator from 'express-validator';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth.js';
+import cors from "cors";
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ mongoose
 // const postRoutes = require('./routes/post');
 
 //middleware
+app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(expressValidator());
