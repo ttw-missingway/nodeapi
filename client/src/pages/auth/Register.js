@@ -1,16 +1,23 @@
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useAuth } from "../../context/Auth";
+import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Register() {
   //state
+  const [name, setName] = useState('Dylan');
   const [email, setEmail] = useState('dylan@gmail.com');
   const [password, setPassword] = useState('qwerty');
+  //hook
+  const [auth, setAuth] = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async(e) =>{
     e.preventDefault();
     try{
-      const { data } = await axios.post(`${process.env.REACT_APP_API}/login`, {
+      const { data } = await axios.post(`${process.env.REACT_APP_API}/register`, {
+        name,
         email,
         password,
       });
@@ -21,24 +28,35 @@ export default function Login() {
         toast.error(data.error);
       }
       else{
-        toast.success('Login Successful');
+        localStorage.setItem('auth', JSON.stringify(data));
+        setAuth({ ...auth, token: data.token, user: data.user});
+        toast.success('Registration Successsful');
+        navigate("/content");
       }
     }
     catch (err){
       console.log(err);
-      toast.error("Login Failed");
+      toast.error("Registration Failed");
     }
   };
 
   return (
     <div>
       <h1>
-        Login
+        Register
       </h1>
       <div className="container mt-5">
         <div className="row">
           <div className="col-md-6 offset-md-3">
             <form onSubmit={handleSubmit}>
+              <input 
+                type="text" 
+                className="form-control mb-4 p-2" 
+                placeholder="Enter your name" 
+                value={name} 
+                onChange={(e) => setName(e.target.value)}
+                autoFocus  
+              />
               <input 
                 type="email" 
                 className="form-control mb-4 p-2" 
