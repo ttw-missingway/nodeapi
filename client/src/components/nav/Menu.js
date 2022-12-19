@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Menu() {
     const [auth, setAuth] = useAuth();
     const navigate = useNavigate();
-
+//
     const logout = () => {
         setAuth({ ...auth, user: null, token: ""});
         localStorage.removeItem("auth");
