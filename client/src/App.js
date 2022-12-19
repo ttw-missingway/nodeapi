@@ -1,8 +1,8 @@
 // import { render } from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import Menu from './components/nav/Menu';
-import Home from "./pages/Home";
+import HomeView from "./views/HomeView";
+import ProfileView from "./views/ProfileView";
 
 const PageNotFound = () => {
   return (
@@ -15,10 +15,10 @@ const PageNotFound = () => {
 export default function App() {
   return (
     <BrowserRouter>
-    <Menu/>
     <Toaster/>
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<HomeView />} />
+      <Route path="/profile" element={<ProfileView />} />
       <Route path="*" element={<PageNotFound />} replace />
     </Routes>
     </BrowserRouter>

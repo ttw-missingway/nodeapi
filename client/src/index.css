@@ -11,3 +11,8 @@ h1{
 .pointer{
     cursor: pointer;
 }
+
+.centered{
+    text-align: center;
+    margin-top: 25px;
+}
