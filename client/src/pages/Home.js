@@ -8,8 +8,6 @@ export default function Home() {
         <h1>
           This is the Home Page
         </h1>
-
-        <pre>{JSON.stringify(auth, null, 4)}</pre>
       </div>
     );
   }

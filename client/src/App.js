@@ -6,6 +6,15 @@ import Home from "./pages/Home";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Content from "./pages/user/Content";
+import PrivateRoute from "./components/routes/PrivateRoute";
+
+const PageNotFound = () => {
+  return (
+    <h1>
+      404 | PAGE NOT FOUND
+    </h1>
+  );
+}
 
 export default function App() {
   return (
@@ -16,7 +25,10 @@ export default function App() {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/content" element={<Content />} />
+      <Route path="/content" element={<PrivateRoute />}>
+        <Route path="" element={<Content />} />
+      </Route>
+      <Route path="*" element={<PageNotFound />} replace />
     </Routes>
     </BrowserRouter>
   );
